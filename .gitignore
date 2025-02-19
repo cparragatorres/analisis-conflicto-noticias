@@ -2,3 +2,18 @@ config.py
 
 # Ejecutar el siguiente comando antes de hacer git commit
 #   jupyter nbconvert --clear-output --inplace *.ipynb
+
+# Si ya hiciste git add . y no borraste los outputs
+#   git reset
+
+# Si ya hiciste git commit y no borraste los outputs
+#   git reset --hard HEAD~1
+
+# Si ya hiciste git push:
+# Si el commit aún no ha sido compartido con otros (es decir, nadie más ha trabajado sobre él), puedes hacer
+#   git reset --soft HEAD~1
+#   git push origin --force
+# ---
+# Si ya compartiste el commit y otros podrían haberse basado en él, es mejor hacer un revert en lugar de un reset --force:
+#   git revert HEAD
+#   git push origin
