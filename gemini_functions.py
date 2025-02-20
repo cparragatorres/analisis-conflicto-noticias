@@ -22,33 +22,39 @@ def read_json_file(filename):
         print(f"Error al leer el archivo JSON: {e}")
         return None
 
+def cargar_prompt(archivo):
+    """Carga un prompt desde un archivo de texto."""
+    try:
+        with open(archivo, 'r', encoding='utf-8') as file:
+            prompt = file.read()
+        return prompt
+    except Exception as e:
+        print(f"Error al cargar el archivo {archivo}: {e}")
+        return None
+
 # Función para hacer la solicitud a la API de Gemini
-def enviar_a_gemini(prompt):
+def enviar_a_gemini(prompt, jsonFile=None):
     """Envía un prompt a la API de Gemini y devuelve la respuesta."""
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash') #Utiliza GenerativeModel
-        response = model.generate_content(prompt) #Utiliza generate_content
+        model = genai.GenerativeModel('gemini-1.5-flash')
+
+        if jsonFile:  # Si se proporcionan datos JSON
+            prompt_con_datos = f"{prompt}\nDatos JSON: {json.dumps(jsonFile)}"
+            response = model.generate_content(prompt_con_datos)
+        else:  # Si solo se proporciona texto
+            response = model.generate_content(prompt)
         return response.text  # Devuelve el texto de la respuesta de Gemini
 
     except Exception as e:
         print(f"Error al enviar solicitud a Gemini: {e}")
         return None
 
-# Función para procesar la respuesta de Gemini
-def process_gemini_response(response):
-    """Procesar la respuesta de Gemini y extraer el resultado."""
-    if response and 'response' in response:
-        return response['response'].get('result', None)
-    else:
-        print("Respuesta de Gemini no contiene los datos esperados.")
-    return None
-
-# Función para guardar el resultado procesado en un archivo JSON
-def save_json_file(data, filename):
-    """Guardar los datos procesados en un archivo JSON."""
+def guardar_respuesta_en_txt(respuesta, archivo_salida):
+    """Guarda la respuesta obtenida en un archivo de texto."""
     try:
-        with open(filename, 'w') as file:
-            json.dump(data, file, indent=4)
-        print(f"Archivo guardado como {filename}")
+        # Abrir el archivo en modo escritura
+        with open(archivo_salida, 'w', encoding='utf-8') as file:
+            file.write(respuesta)
+        print(f"Respuesta guardada en {archivo_salida}")
     except Exception as e:
-        print(f"Error al guardar el archivo JSON: {e}")
+        print(f"Error al guardar la respuesta en el archivo {archivo_salida}: {e}")

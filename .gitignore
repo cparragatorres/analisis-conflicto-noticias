@@ -1,6 +1,7 @@
 config.py
 conflictos
 conflictos/
+respuesta_gemini.txt
 
 # Ejecutar el siguiente comando antes de hacer git commit
 #   jupyter nbconvert --clear-output --inplace *.ipynb
