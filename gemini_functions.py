@@ -1,13 +1,21 @@
-# gemini_functions.py
-
-import requests
+import google.generativeai as genai
 import json
+from config import API_KEY
+
+# Configura la API de Gemini utilizando la clave de API desde config.py
+def configurar_api():
+    """Configura la API de Gemini con la clave proporcionada desde config.py."""
+    try:
+        genai.configure(api_key=API_KEY)
+        print("API de Gemini configurada correctamente.")
+    except Exception as e:
+        print(f"Error al configurar la API de Gemini: {e}")
 
 # Función para leer el archivo JSON
 def read_json_file(filename):
     """Leer un archivo JSON y devolver su contenido."""
     try:
-        with open(filename, 'r') as file:
+        with open(filename, 'r', encoding='utf-8') as file:
             data = json.load(file)
         return data
     except Exception as e:
@@ -15,29 +23,16 @@ def read_json_file(filename):
         return None
 
 # Función para hacer la solicitud a la API de Gemini
-def send_to_gemini(input_text, api_key):
-    """Enviar texto a la API de Gemini y obtener la respuesta."""
-    url = f'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}'
-    body = {
-        "contents": [
-            {
-                "parts": [
-                    {
-                        "text": input_text
-                    }
-                ]
-            }
-        ]
-    }
+def enviar_a_gemini(prompt):
+    """Envía un prompt a la API de Gemini y devuelve la respuesta."""
     try:
-        response = requests.post(url, json=body)
-        response.raise_for_status()  # Levanta error si la solicitud falla
-        return response.json()
-    except requests.exceptions.HTTPError as err:
-        print(f"Error HTTP: {err}")
+        model = genai.GenerativeModel('gemini-1.5-flash') #Utiliza GenerativeModel
+        response = model.generate_content(prompt) #Utiliza generate_content
+        return response.text  # Devuelve el texto de la respuesta de Gemini
+
     except Exception as e:
-        print(f"Error al hacer la solicitud: {e}")
-    return None
+        print(f"Error al enviar solicitud a Gemini: {e}")
+        return None
 
 # Función para procesar la respuesta de Gemini
 def process_gemini_response(response):

@@ -1,4 +1,6 @@
 config.py
+conflictos
+conflictos/
 
 # Ejecutar el siguiente comando antes de hacer git commit
 #   jupyter nbconvert --clear-output --inplace *.ipynb
