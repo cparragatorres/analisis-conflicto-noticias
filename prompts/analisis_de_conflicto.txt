@@ -1,0 +1,38 @@
+Entrada: Un JSON con las URLs y sus contenidos raspados, siguiendo esta estructura:
+
+{
+  "https://noticia1.com": "Contenido raspado del link",
+  "https://noticia2.com": "Contenido raspado del link",
+  "https://noticia3.com": "Contenido raspado del link"
+}
+Instrucciones:
+
+1. Resumen de conflictos:
+
+Realizar un resumen que incluya:
+- Descripción del Conflicto: Breve descripción del conflicto o movimiento social.
+-	Causas: Principales causas y factores que contribuyeron al conflicto.
+-	Actores Involucrados: Nombres completos de los grupos, organizaciones o individuos clave involucrados en el conflicto.
+-	Fechas Exactas: Fechas exactas de los eventos importantes relacionados con el conflicto.
+-	Zona y Región: Ubicación geográfica específica del conflicto, incluyendo la zona y la región.
+-	Impacto: Impacto del conflicto en la sociedad y en las partes involucradas.
+-	Soluciones Propuestas: Soluciones o medidas propuestas para resolver el conflicto
+
+2. Clasificación:
+generar un análisis del contenido extraído sobre posibles conflictos sociales o movimientos sociales en formato JSON. El análisis debe estructurarse con las siguientes claves y valores:
+
+{
+  "https://ejemplo1.com": {
+    "descripcion_conflicto": "Breve descripción del conflicto o movimiento social.",
+    "causas": ["Causa 1", "Causa 2", "Causa 3"],
+    "actores_involucrados": ["Grupo u organización 1", "Grupo u organización 2"],
+    "fechas_importantes": ["YYYY-MM-DD", "YYYY-MM-DD"],
+    "zona_region": "Ubicación geográfica específica",
+    "impacto": "Descripción del impacto en la sociedad y las partes involucradas.",
+    "soluciones_propuestas": ["Solución 1", "Solución 2"]
+  }
+}
+
+3. Salida esperada:
+
+- JSON de enlaces con el análisis de conflictos: Cada enlace válido debe estar acompañado de su respectivo análisis de conflicto social.

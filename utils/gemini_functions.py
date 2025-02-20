@@ -1,6 +1,7 @@
 import google.generativeai as genai
 import json
 from config import API_KEY
+import os
 
 # Configura la API de Gemini utilizando la clave de API desde config.py
 def configurar_api():
@@ -50,11 +51,18 @@ def enviar_a_gemini(prompt, jsonFile=None):
         return None
 
 def guardar_respuesta_en_txt(respuesta, archivo_salida):
-    """Guarda la respuesta obtenida en un archivo de texto."""
+    """Guarda la respuesta obtenida en un archivo de texto en la carpeta respuestas."""
     try:
-        # Abrir el archivo en modo escritura
-        with open(archivo_salida, 'w', encoding='utf-8') as file:
+        # Verificar si la carpeta 'respuestas' existe, si no, crearla
+        if not os.path.exists("respuestas"):
+            os.makedirs("respuestas")
+
+        # Ruta completa del archivo dentro de la carpeta respuestas
+        ruta_completa = os.path.join("respuestas", archivo_salida)
+
+        # Guardar la respuesta en el archivo
+        with open(ruta_completa, 'w', encoding='utf-8') as file:
             file.write(respuesta)
-        print(f"Respuesta guardada en {archivo_salida}")
+        print(f"Respuesta guardada en {ruta_completa}")
     except Exception as e:
         print(f"Error al guardar la respuesta en el archivo {archivo_salida}: {e}")

@@ -1,11 +1,10 @@
 Entrada: Un JSON con las URLs y sus contenidos raspados, siguiendo esta estructura:
-```json
+
 {
   "https://ejemplo1.com": "Contenido raspado del link",
   "https://ejemplo2.com": "Contenido raspado del link",
-  "https://ejemplo3.com": ""
+  "https://ejemplo3.com": "Contenido raspado del link"
 }
-```
 Instrucciones:
 
 1. Filtrar Enlaces Válidos e Inválidos:
@@ -23,12 +22,7 @@ Instrucciones:
 
 Salida esperada:
 
-- JSON de enlaces válidos: Un JSON con los enlaces válidos y sus contenidos.
-- JSON de enlaces inválidos: Un JSON con los enlaces inválidos y el motivo de su descarte.
-- Además, proporcionar el conteo total de enlaces procesados, enlaces válidos e inválidos.
-
 La salida final debe tener la siguiente estructura:
-```json
 {
   "links_validos": {
     "https://ejemplo1.com": "Contenido del enlace válido",
@@ -42,22 +36,3 @@ La salida final debe tener la siguiente estructura:
   "total_links_validos": 80,
   "total_links_invalidos": 20
 }
-
-```
-Contexto de Ejemplo: Para los enlaces proporcionados, el análisis debe verse reflejado de la siguiente manera:
-```json
-{
-  "links_validos": {
-    "https://busquedas.elperuano.pe/dispositivo/NL/2365477-1": "Aprueban el Plan de Acción para la Adopción Progresiva de la Metodología BIM...",
-    "https://www.infobae.com/peru/2025/02/12/sedapal-cortara-el-agua-en-seis-distritos-el-jueves-13-de-febrero-estas-son-las-zonas-afectadas-y-el-horario-de-suspension/": "Sedapal cortará el agua en seis distritos..."
-  },
-  "links_invalidos": {
-    "https://busquedas.elperuano.pe/dispositivo/NL/2367666-1": "Error al scrapear",
-    "https://apps.sunass.gob.pe/simulador-tarifario/#/home._x000D_": "Sunass - Yakúmetro",
-    "https://www.expreso.com.pe/opinion/inversion-publica-asociaciones-publico-privadas-y-obras-por-impuestos/": "Error al scrapear"
-  },
-  "total_links": 100,
-  "total_links_validos": 80,
-  "total_links_invalidos": 20
-}
-```
