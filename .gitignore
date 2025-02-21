@@ -16,6 +16,9 @@ __pycache__/
 respuestas/
 jsons/
 
+# archivo scrapeado
+scraped_texts.json
+
 # Ejecutar el siguiente comando antes de hacer git commit
 #   jupyter nbconvert --clear-output --inplace *.ipynb
 
