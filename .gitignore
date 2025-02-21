@@ -1,9 +1,20 @@
-config.py
-conflictos
+# Ignorar entornos virtuales
+venv/
+env/
+*/venv/
+*/env/
 conflictos/
-respuesta_gemini.txt
+*/conflictos/
+
+# API_KEY
+config.py
+
+# CACHE
 __pycache__/
+
+# CARPETAS TEMPORALES
 respuestas/
+jsons/
 
 # Ejecutar el siguiente comando antes de hacer git commit
 #   jupyter nbconvert --clear-output --inplace *.ipynb
