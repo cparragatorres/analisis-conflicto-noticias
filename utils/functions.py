@@ -1,5 +1,6 @@
 import os
 import json
+import re
 
 def limpiar_json(json_data, valor_a_eliminar):
     """Elimina las claves de un JSON que tengan un valor específico."""
@@ -26,3 +27,54 @@ def guardar_fragmentos(fragmentos, carpeta_destino="jsons"):
             print(f"Fragmento {i} guardado en {nombre_archivo}")
         except Exception as e:
             print(f"Error al guardar el fragmento {i}: {e}")
+
+def extraer_json_de_txt(archivo_txt):
+    try:
+        # Leer el contenido del archivo
+        with open(archivo_txt, "r", encoding="utf-8") as file:
+            contenido = file.read()
+
+        # Buscar JSON dentro de delimitadores ```json ... ```
+        match = re.search(r"```json\n(.*?)\n```", contenido, re.DOTALL)
+
+        if match:
+            json_str = match.group(1)  # Extraer solo la parte JSON
+            try:
+                return json.loads(json_str)  # Convertir a diccionario JSON
+            except json.JSONDecodeError as e:
+                print(f"Error al decodificar JSON en {archivo_txt}: {e}")
+                return None
+        else:
+            print(f"No se encontró JSON en {archivo_txt}")
+            return None
+    except Exception as e:
+        print(f"Error al leer el archivo {archivo_txt}: {e}")
+        return None
+
+def unir_jsons(carpeta_jsons, archivo_salida):
+    json_completo = {}
+
+    # Obtener la lista de archivos JSON en la carpeta
+    archivos_json = sorted([f for f in os.listdir(carpeta_jsons) if f.endswith(".json")])
+
+    # Leer cada archivo JSON y combinarlo en un solo diccionario
+    for archivo in archivos_json:
+        ruta_json = os.path.join(carpeta_jsons, archivo)
+
+        try:
+            with open(ruta_json, "r", encoding="utf-8") as file:
+                datos = json.load(file)
+                json_completo.update(datos)  # Agregar datos al JSON combinado
+
+        except json.JSONDecodeError as e:
+            print(f"Error al procesar {archivo}: {e}")
+        except Exception as e:
+            print(f"Error al leer {archivo}: {e}")
+
+    # Guardar el JSON consolidado
+    try:
+        with open(archivo_salida, "w", encoding="utf-8") as file:
+            json.dump(json_completo, file, indent=4, ensure_ascii=False)
+        print(f"JSON consolidado guardado en {archivo_salida}")
+    except Exception as e:
+        print(f"Error al guardar {archivo_salida}: {e}")
