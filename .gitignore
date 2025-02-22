@@ -16,8 +16,9 @@ __pycache__/
 respuestas/
 jsons/
 
-# archivo scrapeado
+# archivos trabajados
 scraped_texts.json
+join_respuestas_gemini.json
 
 # Ejecutar el siguiente comando antes de hacer git commit
 #   jupyter nbconvert --clear-output --inplace *.ipynb
