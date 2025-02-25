@@ -36,4 +36,4 @@ join_respuestas_gemini.json
 # ---
 # Si ya compartiste el commit y otros podrían haberse basado en él, es mejor hacer un revert en lugar de un reset --force:
 #   git revert HEAD
-#   git push origin
+#   git push originconfig.py
