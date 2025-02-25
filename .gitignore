@@ -7,7 +7,7 @@ conflictos/
 */conflictos/
 
 # API_KEY
-config.py
+# config.py
 
 # CACHE
 __pycache__/
